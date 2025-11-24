@@ -12,7 +12,7 @@ fun AppNavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "login"   // 👈 Login is first
+        startDestination = "login"
     ) {
 
         composable("login") {
