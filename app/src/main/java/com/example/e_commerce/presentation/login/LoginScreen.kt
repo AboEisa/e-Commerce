@@ -241,7 +241,7 @@ fun LoginScreen(
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(50.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF1A1A1A),
@@ -289,7 +289,7 @@ fun LoginScreen(
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(50.dp),
             shape = RoundedCornerShape(12.dp),
             border = BorderStroke(1.5.dp, Color(0xFFE0E0E0)),
             colors = ButtonDefaults.outlinedButtonColors(
@@ -319,7 +319,7 @@ fun LoginScreen(
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(50.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF1877F2),
