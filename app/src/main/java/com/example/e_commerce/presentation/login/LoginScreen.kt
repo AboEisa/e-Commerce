@@ -2,6 +2,7 @@ package com.example.e_commerce.presentation.login
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,12 +52,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.e_commerce.R
-import com.example.e_commerce.ui.theme.ECommerceTheme
 import com.example.e_commerce.utils.isValidEmail
-
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.foundation.clickable
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToRegister: () -> Unit = {}
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -66,8 +70,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             .background(Color.White)
             .systemBarsPadding()
             .padding(horizontal = 24.dp)
-            .verticalScroll(rememberScrollState())
-    ) {
+            .verticalScroll(rememberScrollState())) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
@@ -359,20 +362,17 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             pop()
         }
 
-        Text(
+      Text(
             text = annotatedString2,
             color = Color(0xFF6B6B6B),
             fontSize = 14.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 24.dp),
+                .padding(bottom = 24.dp)
+                .clickable { onNavigateToRegister() },
             textAlign = TextAlign.Center
         )
-
-
     }
-
-
 }
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

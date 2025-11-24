@@ -9,24 +9,31 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.e_commerce.presentation.login.LoginScreen
+import com.example.e_commerce.presentation.navigation.AppNavGraph
 import com.example.e_commerce.presentation.register.RegisterScreen
 import com.example.e_commerce.ui.theme.ECommerceTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
-//            RegisterScreen()
-            LoginScreen()
-
-
+            val navController = androidx.navigation.compose.rememberNavController()
+            AppNavGraph(navController = navController)
         }
     }
 }
+
+
 
 
 @Preview(showBackground = true)
