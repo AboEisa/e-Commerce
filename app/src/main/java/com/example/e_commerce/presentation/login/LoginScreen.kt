@@ -55,11 +55,13 @@ import com.example.e_commerce.R
 import com.example.e_commerce.utils.isValidEmail
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavController
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
-    onNavigateToRegister: () -> Unit = {}
+   navController: NavController
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -238,7 +240,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
@@ -349,33 +351,49 @@ fun LoginScreen(
         Spacer(modifier = Modifier.weight(1f))
         Spacer(modifier = Modifier.height(32.dp))
 
-        val annotatedString2 = buildAnnotatedString {
+        val joinAnnotatedString = buildAnnotatedString {
             append("Don't have an account? ")
-            pushStyle(
+            pushStringAnnotation(tag = "JOIN", annotation = "join")
+            withStyle(
                 style = SpanStyle(
-                    textDecoration = TextDecoration.Underline,
                     color = Color(0xFF1A1A1A),
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    textDecoration = TextDecoration.Underline
                 )
-            )
-            append("Join")
+            ) {
+                append("Join")
+            }
             pop()
         }
 
-      Text(
-            text = annotatedString2,
-            color = Color(0xFF6B6B6B),
-            fontSize = 14.sp,
+        ClickableText(
+            text = joinAnnotatedString,
+            style = androidx.compose.ui.text.TextStyle(
+                fontSize = 14.sp,
+                color = Color(0xFF6B6B6B),
+                textAlign = TextAlign.Center
+            ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 24.dp)
-                .clickable { onNavigateToRegister() },
-            textAlign = TextAlign.Center
+                .padding(bottom = 24.dp),
+            onClick = { offset ->
+                joinAnnotatedString.getStringAnnotations(tag = "JOIN", start = offset, end = offset)
+                    .firstOrNull()?.let {
+                        navController.navigate("register") {
+                            popUpTo("login"){  }
+                            launchSingleTop = true
+
+                        }
+                    }
+            }
         )
+
     }
 }
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(
+        navController = NavController(LocalContext.current)
+    )
 }
